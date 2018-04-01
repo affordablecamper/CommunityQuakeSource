@@ -1,0 +1,155 @@
+
+newmtl black
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+
+
+
+
+newmtl Legacy Shaders/Diffuse
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd 
+
+
+
+
+newmtl cretebase4
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd cretebase4.tga
+
+
+
+
+newmtl Legacy Shaders/Lightmapped/Diffuse
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd 
+
+
+
+
+newmtl cretebase3
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd cretebase3.tga
+
+
+
+
+newmtl cretebase2
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd cretebase2.tga
+
+
+
+
+newmtl cretebase
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd cretebase.tga
+
+
+
+
+newmtl cretetrimlight4
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd cretetrimlight4.tga
+
+
+
+
+newmtl tlight.blend
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd tlight.blend.tga
+
+
+
+
+newmtl tlight
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd tlight.tga
+
+
+
+
+newmtl weapspawn01
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd weapspawn01.tga
+
+
+
+
+newmtl ame7gael1jp2
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd ame7gael1jp2.jpg
+
+
+
+
+newmtl ame7gael1jp
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.1 0.1 0.1
+d  1.0
+Ns  150.0
+illum 2
+map_Kd ame7gael1jp.jpg
+
+
+
