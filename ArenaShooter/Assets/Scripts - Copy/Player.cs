@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 public class Player : NetworkBehaviour {
 
-
+    public bool diedFalling;
     public float respawnTimer;
     public Camera deathCam;
     public AudioSource source;
@@ -15,6 +15,7 @@ public class Player : NetworkBehaviour {
     public AudioClip healthnoise1;
     public AudioClip healthnoise2;
     public AudioClip healthnoise3;
+    public AudioClip diedFallingNoise;
     public float deathnoiseSelect;
     [SyncVar]
     private bool _isDead = false;
@@ -23,7 +24,7 @@ public class Player : NetworkBehaviour {
     private bool _charDead;
     //public GameObject ragDoll;
     //public GameObject BloodSplatter;
-    //public CapsuleCollider playercollider;
+    public CapsuleCollider playercollider;
     public bool isDead
 
     {
@@ -36,14 +37,14 @@ public class Player : NetworkBehaviour {
 
 
     [SerializeField]
-    private int maxHealth = 100;
+    private float maxHealth = 100;
 
     [SyncVar]
-    public int currentHealth;
+    public float currentHealth;
 
     private void Start()
     {
-
+        
     }
 
     [SerializeField]
@@ -74,7 +75,13 @@ public class Player : NetworkBehaviour {
     }
     public void DeathByTrigger() {
 
-        RpcTakeDamage(100);
+        RpcTakeDamage(999);
+        var _Trig = GameObject.FindGameObjectWithTag("FallTrigger").GetComponent<deathTrigger>();
+        if (_Trig.diedFalling == true) {
+            diedFalling = true;
+        }
+            
+        
 
     }
 
@@ -98,7 +105,7 @@ public class Player : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcTakeDamage(int _amount) {
+    public void RpcTakeDamage(float _amount) {
 
         if (isDead)
             return;
@@ -132,20 +139,22 @@ public class Player : NetworkBehaviour {
         {
             deathnoiseSelect = UnityEngine.Random.Range(1, 4);
 
-            if (deathnoiseSelect == 1) {
+            if (deathnoiseSelect == 1 && diedFalling == false) {
                 source.PlayOneShot(deathnoise);
             }
                 
 
-            if (deathnoiseSelect == 2) {
+            if (deathnoiseSelect == 2 && diedFalling == false) {
                 source.PlayOneShot(deathnoise2);
             }
 
 
-            if (deathnoiseSelect == 3) {
+            if (deathnoiseSelect == 3 && diedFalling == false) {
                 source.PlayOneShot(deathnoise3);
             }
-                
+
+            if (diedFalling)
+                source.PlayOneShot(diedFallingNoise);
 
             Die();
 
@@ -156,6 +165,7 @@ public class Player : NetworkBehaviour {
 
     private void Die()
     {
+        transform.gameObject.tag = "Dead";
         isDead = true;
         _charDead = true;
         for (int i = 0; i < disableOnDeath.Length; i++)
@@ -165,7 +175,7 @@ public class Player : NetworkBehaviour {
             disableOnDeath[i].enabled = false;
         }
 
-       // playercollider.enabled = false;
+        playercollider.enabled = false;
         for (int i = 0; i < rend.Length; i++)
         {
 
@@ -242,12 +252,12 @@ public class Player : NetworkBehaviour {
 
     public void SetDefaults()
     {
-
+        diedFalling = false;
         isDead = false;
-        //playercollider.enabled = false;
+        playercollider.enabled = true;
         _charDead = false;
         currentHealth = maxHealth;
-
+        transform.gameObject.tag = "Player";
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
 

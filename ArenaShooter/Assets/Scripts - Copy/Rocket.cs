@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.Diagnostics;
+using UnityEngine.Networking;
 
-
-public class Rocket : MonoBehaviour
+public class Rocket : NetworkBehaviour
 {
     public Stopwatch timer;
     public Camera cam;
@@ -20,6 +20,15 @@ public class Rocket : MonoBehaviour
     public float recoilAmount;
     public float fireRate;
     private float nextFire;
+    public float proximity;
+    public float Splashdamage;
+    public float CritHitDamage;
+    public float splashRadius;
+    public RaycastHit hitInfo;
+    public Collider[] hitColliders;
+    public LayerMask LayerToHit;
+    private Vector3 midScreen;
+    
     private void Start()
     {
         
@@ -35,7 +44,7 @@ public class Rocket : MonoBehaviour
             nextFire = Time.time + fireRate;
             Audio.PlayOneShot(RocketFire);
             Shoot();
-            RayCastShoot();
+
             Vector3 weaponObjectLocalPosition = RocketLauncherObj.transform.localPosition;
             weaponObjectLocalPosition.z = weaponObjectLocalPosition.z - recoilAmount;
             RocketLauncherObj.transform.localPosition = weaponObjectLocalPosition;
@@ -50,35 +59,21 @@ public class Rocket : MonoBehaviour
 
     private void Shoot()
     {
-        tempProjectile = Instantiate(rocketObj, fwd.position, fwd.rotation) as GameObject;
-        var rb = tempProjectile.GetComponent<Rigidbody>();
-        rb.AddForce(tempProjectile.transform.forward * rocketSpeed);
-        Destroy(tempProjectile, 6);
+
+        Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+        var instanceRocket = Instantiate(rocketObj, transform.position, transform.rotation);
+        var rb = instanceRocket.GetComponent<Rigidbody>();
+        rb.AddForce(ray.direction * rocketSpeed);
+        
         
     }
 
-    private void RayCastShoot()
-    {
-        Ray ray = cam.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
-        RaycastHit hitInfo;
+    
 
-        if (Physics.Raycast(ray, out hitInfo))
-        {
-            
-            //RocketLauncherObj.LookAt(hitInfo.transform);
-           
-
-                var tempexpEffect = Instantiate(explosionEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                Destroy(tempexpEffect, 1);
-                Destroy(tempProjectile);
-
-               
-            
-            
-
-        }
+    
 
 
-    }
+
+
 
 }

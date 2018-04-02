@@ -20,9 +20,9 @@ public class Playersetup : NetworkBehaviour {
     string viewworldModel = "ViewModel";
     [SerializeField]
     public GameObject  _worldModel;
-    
+    public bool _charDead;
     public GameObject _viewModel;
-    
+    public CharacterController playerController;
     //[SerializeField]
    // GameObject _Weapon;
     void Start () {
@@ -123,6 +123,7 @@ public class Playersetup : NetworkBehaviour {
 
     void DisableComponents () {
 
+        _charDead = true;
         for (int i = 0; i < componentstoDisable.Length; i++)
         {
             
@@ -166,6 +167,12 @@ public class Playersetup : NetworkBehaviour {
 
     // Update is called once per frame
     void Update () {
-      
+
+        if (_charDead)
+        {
+
+            playerController.enabled = false;
+        }
+
     }
 }

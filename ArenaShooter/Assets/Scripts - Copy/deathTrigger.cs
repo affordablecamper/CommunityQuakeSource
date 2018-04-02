@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class deathTrigger : MonoBehaviour {
-
+    public bool diedFalling;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,9 +15,12 @@ public class deathTrigger : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            
+            Debug.Log("deathbytrigger");
             var PlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            diedFalling = true;
             PlayerScript.DeathByTrigger();
+            
+
         }
 
          
